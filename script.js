@@ -57,13 +57,13 @@ switch (menu) {
         intereses /= 100;
         
         let plazo = parseInt(prompt("Ingrese el plazo de amortización:"));
-        let plazoTime = prompt("¿El plazo de amortización es en meses o años? (responda 'meses' o 'años'):");
+        let plazoTime = prompt("¿El plazo de amortización es en meses o años? (responda 'meses' o 'años'):").toLowerCase();
         
         if (isNaN(importe) || isNaN(intereses) || isNaN(plazo)) {
             console.log("Por favor, ingrese valores numéricos válidos.");
         } else {
-            if (plazoTime.toLowerCase() === 'años') {
-                plazo *= 12;
+            if (plazoTime === 'años') {
+                plazo *= 12; // Convertimos el plazo a meses si está en años
             }
         
             let mensual = intereses / 12;
