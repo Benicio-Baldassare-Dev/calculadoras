@@ -59,13 +59,13 @@ switch (menu) {
         let plazo = parseInt(prompt("Ingrese el plazo de amortización:"));
         let plazoTime = prompt("¿El plazo de amortización es en meses o años? (responda 'meses' o 'años'):");
         
-        if (plazoTime.toLowerCase() === 'años') {
-            plazo *= 12;
-        }
-        
         if (isNaN(importe) || isNaN(intereses) || isNaN(plazo)) {
             console.log("Por favor, ingrese valores numéricos válidos.");
         } else {
+            if (plazoTime.toLowerCase() === 'años') {
+                plazo *= 12;
+            }
+        
             let mensual = intereses / 12;
             let mensualPay = (importe * mensual) / (1 - Math.pow(1 + mensual, -plazo));
         
