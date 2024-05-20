@@ -47,38 +47,39 @@ switch (menu) {
         console.log("Bienvenido a la Calculadora de Préstamos");
 
         let importe = parseInt(prompt("Ingrese el importe del préstamo:"));
-
+        
         while (importe > 2000000) {
-            console.log("El importe maximo es de $2.000.000");
+            console.log("El importe máximo es de $2.000.000");
             importe = parseInt(prompt("Ingrese el importe del préstamo:"));
         }
-
-
-        let intereses = parseInt(prompt("Ingrese la tasa de interés (%):"))
+        
+        let intereses = parseFloat(prompt("Ingrese la tasa de interés (%):"));
         intereses /= 100;
-
+        
         let plazo = parseInt(prompt("Ingrese el plazo de amortización:"));
         let plazoTime = prompt("¿El plazo de amortización es en meses o años? (responda 'meses' o 'años'):");
-
-
+        
+        if (plazoTime.toLowerCase() === 'años') {
+            plazo *= 12;
+        }
+        
         if (isNaN(importe) || isNaN(intereses) || isNaN(plazo)) {
             console.log("Por favor, ingrese valores numéricos válidos.");
-        }
-        else {
-
+        } else {
             let mensual = intereses / 12;
             let mensualPay = (importe * mensual) / (1 - Math.pow(1 + mensual, -plazo));
-
+        
             let interesTotal = (mensualPay * plazo) - importe;
-
+        
             console.log("Datos del préstamo:");
             console.log("Importe del préstamo: " + importe);
-            console.log("Tasa de interés (%): " + intereses * 100);
-            console.log("Plazo de amortización: " + plazo + " " + (plazoTime === 'meses' ? 'meses' : 'años'));
-            console.log("Resultados del Prestamo:");
+            console.log("Tasa de interés (%): " + (intereses * 100));
+            console.log("Plazo de amortización: " + plazo + " meses");
+            console.log("Resultados del Préstamo:");
             console.log("Cuota Mensual: " + mensualPay.toFixed(2));
             console.log("Total de Interés: " + interesTotal.toFixed(2));
         }
+        
         break;
     case 2:
         let operadores = Number(prompt("1. Sumar \n 2. Restar \n 3. Multiplicar \n 4. Dividir"));
